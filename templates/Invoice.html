@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>Invoice</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="toolbar hidden-print">
+            <div class="text-right">
+                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                <a id="addNew" href="{{ url_for('insert_invoice') }}">Add Transaction</a></h2>
+            </div>
+            <hr>
+        </div>
+        <div id="content">
+            <div class="jumbotron p-3">
+                <div class="row contacts" align="left">
+                    <div class="col invoice-to">
+                     <div class="text-gray-light">Recepit_No:{{Service.id}}/{{Service.receipt_no}}/{{Service.financial_year}}</div>
+                    </div>
+                    <div class="col invoice-details" align="right">
+                        <div class="date"> Date:{{Service.date}}</div>
+                   </div>
+                </div>
+
+             <header>
+                  <h2 align="center">Accounting Consultant</h2>
+                  <div align="center">At, Anand</div>
+                 <div align="center">Mobile_no-:9978161735</div>
+             </header>
+
+               <header>
+                  <h5 align="center">Party:{{Service.party_name}}</h5>
+                  <div align="center">Address:{{Service.address}}</div>
+             </header>
+
+             <table class="table table-hover" border="2" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">DESCRIPTION</th>
+                        <th class="text-right">AMOUNT</th>
+                    </tr>
+                </thead>
+
+                 <tbody>
+                    <tr>
+                        <td class="text-center">{{Service.charges}}</td>
+                        <td class="text-right">{{Service.amount}}</td>
+                    </tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr>
+                        <td></td><td class="text-right">Total:{{Service.total}}</td>
+                    </tr>
+                    
+                 </tbody>
+
+
+             </table>
+
+             <br>
+             <br>
+             <br>
+             <br><br>
+
+
+             <div align="right">Authorized Signature</div>
+
+             <footer>
+                <div align="center">Invoice was created on a computer and is valid without the signature and seal.</div>
+             </footer>
+            </div>
+        </div>
+                 
+    </div>
+
+</body>
+
+<script>
+     $('#printInvoice').click(function(){
+            Popup($('.jumbotron')[0].outerHTML);
+            function Popup(data)
+            {
+                var ButtonControl = document.getElementById("printInvoice");
+                ButtonControl.style.visibility = "hidden";
+                var ButtonControl = document.getElementById("addNew");
+                ButtonControl.style.visibility = "hidden";
+                window.print();
+                return true;
+            }
+
+        });
+
+
+</script>
+
+</html>
